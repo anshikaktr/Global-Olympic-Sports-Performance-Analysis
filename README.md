@@ -37,5 +37,3 @@ git remote add origin <your-repo-url>
 git push -u origin main
 ```
 
-## Before submitting: fill these in
-See `TODO.md`.
