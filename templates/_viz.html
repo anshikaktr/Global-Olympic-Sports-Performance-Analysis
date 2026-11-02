@@ -1,0 +1,8 @@
+{% macro viz(url, preview, label) %}
+{% if url %}
+<tableau-viz src="{{ url }}" width="100%" height="900" hide-tabs toolbar="bottom"></tableau-viz>
+{% else %}
+<div class="alert alert-warning">No Tableau Public URL set for <strong>{{ label }}</strong>. Set it in <code>app.py</code> or with an environment variable.</div>
+{% if preview %}<img class="img-fluid" src="{{ url_for('static', filename=preview) }}" alt="{{ label }} preview">{% endif %}
+{% endif %}
+{% endmacro %}
