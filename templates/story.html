@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% from "_viz.html" import tableau %}
+{% block title %}Story{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title">The Olympic Performance Story</h2>
+    <p class="text-center mb-4">Six scenes: map, trend, top countries, podium rate, regional efficiency and athletes sent vs medals.</p>
+    <div class="viz-wrap">
+      {{ tableau('viz_story', views.story, 'story', static.story) }}
+    </div>
+  </div>
+</section>
+{% endblock %}

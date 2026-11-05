@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<header class="hero">
+  <div class="container">
+    <h1>Global Sports Performance <span>Analytics</span></h1>
+    <p class="lead">Medals, athletes and regional performance across the Summer and Winter Olympic Games, 1992 to 2026.</p>
+    <a class="btn btn-gold btn-lg me-2" href="{{ url_for('dashboards') }}">View dashboards</a>
+    <a class="btn btn-outline-light btn-lg" href="{{ url_for('story') }}">Read the story</a>
+  </div>
+</header>
+
+<section class="stats">
+  <div class="container">
+    <div class="row text-center">
+      {% for value, label in stats %}
+      <div class="col-6 col-md-3 stat"><div class="num">{{ value }}</div><div>{{ label }}</div></div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title">About this project</h2>
+    <p class="text-center mx-auto narrow">The Olympic Games show how nations invest in sport, but the data runs to over 166,000 athlete entries. These dashboards help national committees, analysts and journalists see where medals are won, how participation has changed and which regions convert athletes into medals.</p>
+    <div class="row g-4 mt-2">
+      <div class="col-md-4"><div class="card-box"><h5>Medal leaders</h5><p>The United States leads with 1,222 medals, followed by China (759) and Germany (726).</p></div></div>
+      <div class="col-md-4"><div class="card-box"><h5>Summer and Winter</h5><p>Summer Games award 815 to 1,080 medals per edition; Winter Games 171 to 349.</p></div></div>
+      <div class="col-md-4"><div class="card-box"><h5>Regional efficiency</h5><p>From 1992 to 2016, Europe/Asia won about 14 medals per 100 athletes sent, South America about 3.</p></div></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

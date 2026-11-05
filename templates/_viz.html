@@ -1,0 +1,43 @@
+{# Reusable Tableau Public embed. mode: 'dashboard' (fixed size 1200x1000) or 'story' #}
+{% macro tableau(div_id, view_name, mode='story', static_img=None) %}
+<div class='tableauPlaceholder' id='{{ div_id }}' style='position: relative'>
+  <noscript><p>Please enable JavaScript to view this Tableau visualization.</p></noscript>
+  <object class='tableauViz' style='display:none;'>
+    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+    <param name='embed_code_version' value='3' />
+    <param name='site_root' value='' />
+    <param name='name' value='{{ view_name }}' />
+    <param name='tabs' value='no' />
+    <param name='toolbar' value='yes' />
+    {% if static_img %}<param name='static_image' value='https://public.tableau.com/static/images/{{ static_img }}' />{% endif %}
+    <param name='animate_transition' value='yes' />
+    <param name='display_static_image' value='{{ "yes" if static_img else "no" }}' />
+    <param name='display_spinner' value='yes' />
+    <param name='display_overlay' value='yes' />
+    <param name='display_count' value='yes' />
+    <param name='language' value='en-US' />
+  </object>
+</div>
+<p class="small text-muted mt-2">If the visualization does not load, <a href="https://public.tableau.com/views/{{ view_name }}" target="_blank" rel="noopener">open it on Tableau Public</a>.</p>
+<script type='text/javascript'>
+  (function () {
+    var divElement = document.getElementById('{{ div_id }}');
+    var vizElement = divElement.getElementsByTagName('object')[0];
+    {% if mode == 'dashboard' %}
+    if (divElement.offsetWidth > 500) {
+      vizElement.style.minWidth = '1200px'; vizElement.style.maxWidth = '100%';
+      vizElement.style.minHeight = '1050px'; vizElement.style.maxHeight = (divElement.offsetWidth * 0.75) + 'px';
+    } else {
+      vizElement.style.width = '100%'; vizElement.style.minHeight = '2000px';
+      vizElement.style.maxHeight = (divElement.offsetWidth * 1.77) + 'px';
+    }
+    {% else %}
+    vizElement.style.width = '100%';
+    vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+    {% endif %}
+    var scriptElement = document.createElement('script');
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  })();
+</script>
+{% endmacro %}

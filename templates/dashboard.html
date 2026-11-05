@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% from "_viz.html" import tableau %}
+{% block title %}Dashboards{% endblock %}
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title">Interactive Dashboards</h2>
+    <p class="text-center mb-4">
+      <a href="#d1" class="btn btn-sm btn-outline-dark">Global Sports Performance</a>
+      <a href="#d2" class="btn btn-sm btn-outline-dark">Regional Efficiency</a>
+    </p>
+    <div id="d1" class="viz-wrap">
+      <h4>Global Sports Performance Analytics Dashboard</h4>
+      {{ tableau('viz_dashboard1', views.dashboard1, 'dashboard', static.dashboard1) }}
+    </div>
+    <div id="d2" class="viz-wrap">
+      <h4>Olympic Performance and Regional Efficiency Dashboard</h4>
+      {{ tableau('viz_dashboard2', views.dashboard2, 'dashboard', static.dashboard2) }}
+    </div>
+  </div>
+</section>
+{% endblock %}
