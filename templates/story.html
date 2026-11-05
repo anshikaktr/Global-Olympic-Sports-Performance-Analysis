@@ -1,9 +1,0 @@
-{% extends "base.html" %}
-{% from "_viz.html" import viz %}
-{% block title %}Story{% endblock %}
-{% block content %}
-<main class="container-fluid py-4">
-  <h2 class="text-center mb-3">Olympic Performance Story</h2>
-  {{ viz(tableau.story, None, 'Story') }}
-</main>
-{% endblock %}
