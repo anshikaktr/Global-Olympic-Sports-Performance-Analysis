@@ -1,36 +1,37 @@
-"""Flask app embedding the published Tableau Public dashboards and story."""
-import os
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
-# Replace these with your Tableau Public "Share" URLs (or set environment variables).
-# Use the plain view URL, e.g. https://public.tableau.com/views/<workbook>/<sheet>
-TABLEAU = {
-    "dashboard1": os.getenv("TABLEAU_DASHBOARD1_URL", ""),
-    "dashboard2": os.getenv("TABLEAU_DASHBOARD2_URL", ""),
-    "story": os.getenv("TABLEAU_STORY_URL", ""),
+# Published Tableau Public workbook (same workbook for all three views)
+WORKBOOK = "GlobalOlympicSportsPerformanceAnalysis_17932858582970"
+VIEWS = {
+    "dashboard1": f"{WORKBOOK}/Dashboard1",   
+    "dashboard2": f"{WORKBOOK}/Dashboard2",   
+    "story": f"{WORKBOOK}/Story1",
 }
+STATIC = {k: f"Gl/{v}/1.png" for k, v in VIEWS.items()}
 
-
-@app.context_processor
-def inject_urls():
-    return {"tableau": TABLEAU}
+STATS = [
+    ("19", "Olympic Games (1992-2026)"),
+    ("218", "National Olympic Committees"),
+    ("11,106", "Medals awarded"),
+    ("80,435", "Athletes in the data"),
+]
 
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("index.html", stats=STATS)
 
 
-@app.route("/dashboard")
-def dashboard():
-    return render_template("dashboard.html")
+@app.route("/dashboards")
+def dashboards():
+    return render_template("dashboard.html", views=VIEWS, static=STATIC)
 
 
 @app.route("/story")
 def story():
-    return render_template("story.html")
+    return render_template("story.html", views=VIEWS, static=STATIC)
 
 
 if __name__ == "__main__":
