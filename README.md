@@ -17,15 +17,21 @@ docs/
   7. Project Documentation/     Final report
   8.Project Demonstration/      Communication, features, demo plan, scalability, team
 ```
-The Snowflake templates in the original zip are not included because this project uses Tableau and flat CSVs.
 
 ## Run locally
 ```
-python -m venv .venv && source .venv/bin/activate   # Windows: .venv\Scripts\activate
+cd tableau_flask
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 python app.py
 ```
-Set the Tableau Public URLs in `app.py` or with the environment variables `TABLEAU_DASHBOARD1_URL`, `TABLEAU_DASHBOARD2_URL`, `TABLEAU_STORY_URL`. Until then the pages show a placeholder and a preview image. The embed uses Tableau's JavaScript embedding script; confirm the script URL and `<tableau-viz>` attributes against the current Tableau Public embedding docs.
+Open http://127.0.0.1:5000
+
+## Pages
+- `/` home with project summary
+- `/dashboards` Dashboard 1 and Dashboard 2 (interactive, filters work inside the embed)
+- `/story` Tableau story (6 scenes)
 
 ## Push to GitHub
 ```
